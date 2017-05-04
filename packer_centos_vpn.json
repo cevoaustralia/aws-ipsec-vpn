@@ -1,0 +1,41 @@
+{
+	"variables": {},
+		"builders": [
+		{
+			"ami_block_device_mappings": [
+			{
+				"device_name": "/dev/sda1",
+				"delete_on_termination": "true",
+				"volume_type": "gp2"
+			}
+			],
+			"type": "amazon-ebs",
+			"region": "ap-southeast-2",
+			"source_ami": "ami-24959b47",
+			"instance_type": "t2.micro",
+			"ssh_username": "centos",
+			"ssh_pty": "true",
+			"ami_name": "centos-7-ipsec-vpn-{{timestamp}}",
+			"ami_description": "Centos 7 IPSec VPN Image",
+			"ami_users": [ ""
+			],
+			"tags": {
+				"Name": "Centos 7 IPSec VPN",
+				"Application": "common",
+				"Owner": "",
+				"Date": "{{isotime}}"
+			}
+		}
+	],
+	"provisioners": [
+	{
+    "type": "file",
+    "source": "packer_ipsec.conf",
+    "destination": "/tmp/ipsec.conf"
+  },
+	{
+		"type": "shell",
+		"script": "packer_provision.sh"
+	}
+	]
+}

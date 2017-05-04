@@ -1,0 +1,30 @@
+[
+  {
+    "ParameterKey": "KeyPair",
+    "ParameterValue": ""
+  }, 
+  {
+    "ParameterKey": "ImageID",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "SSHLocation",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "Subnets",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "keyId",
+    "ParameterValue": ""
+  },
+  {
+    "ParameterKey": "HostedZone",
+    "ParameterValue": ""
+  }
+]
