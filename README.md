@@ -136,5 +136,5 @@ Note: The /etc/ipsec.secrets file is provisioned from the provision.sh script. T
 
 ## Todo
 
-[ ] prove external authentication mechanism
-[ ] improve hardening (follow: https://wiki.centos.org/HowTos/OS_Protection)
+[ ] prove external authentication mechanism  
+[ ] improve hardening (follow: https://wiki.centos.org/HowTos/OS_Protection)  
