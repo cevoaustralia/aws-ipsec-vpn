@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -e
 
 function usage {
     echo "usage: $0 Pre-Shared-Key [Key-ID]"
