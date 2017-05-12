@@ -1,29 +1,13 @@
 ## Cloudformation Stack for a IPSec VPN
 
-## Files
+## Description
+![architecture diagram](./aws-ipsec-vpn.svg "architecture diagram")
+Generated using draw.io, [source](./aws-ipsec-vpn.io).
 
-#### README.md
-This file. It describes the project and how to use it.
+This is a simple cloudformation stack to provide an IPSec VPN into an AWS account.  
+It includes a packer configuration for generating a Centos AMI running [Libreswan](https://libreswan.org/), and a Cloudformation template for generating the AWS-IPsec-VPN stack.  
 
-#### cloudformation_vpn_stack.json
-The cloudformation template for the vpn stack.
-
-#### cloudformation_parameters.json
-The parameters for the VPN stack. You will need to fill these out in order to create the stack.
-
-#### packer_centos_vpn.json
-The packer configuration for the centos VPN host.
-
-#### packer_ipsec.conf
-The configuration file for the libreswan IPSec vpn server. This is baked onto the AMI during the packer provisioing process.
-
-#### packer_provision.sh
-The script used when baking the base AMI, it installs the necessary software such as libreswan and the aws-cli, creates base configurations, and performs some basic hardening.
-
-#### set-psk.sh
-A helper script to set the Pre-Shared-Key for the VPN. The first argument (required) is the pre-shared-key, to include spaces or special characters wrap it in single quotes.  
-The second argument (optional) is the KMS Key-ID to use. If this is not set, a new Key will be created.  
-The script will return the Key-ID used to encypt the PSK, this will need to be placed into the appropriate place in the parameters.json file.
+The Stack consists of an auto-scaling group with a single instance for reliability. On startup the instance assumes role which allows it to associate an Elastic IP address. The role also allows the instance to decrypt the Pre-Shared-Key for the VPN which is stored as secure-string stored in the ec2 parameter store, which is managed outside of the stack. The cloudformation stack will also register a Route53 record and point it to the Elastic IP.
 
 ## Usage
 
@@ -134,7 +118,33 @@ To make changes, update this file and bake a new AMI.
 
 Note: The /etc/ipsec.secrets file is provisioned from the provision.sh script. The contents of this file are replaced at instance boot-up from the user-data scripts.
 
+## Files
+
+#### README.md
+This file. It describes the project and how to use it.
+
+#### cloudformation_vpn_stack.json
+The cloudformation template for the vpn stack.
+
+#### cloudformation_parameters.json
+The parameters for the VPN stack. You will need to fill these out in order to create the stack.
+
+#### packer_centos_vpn.json
+The packer configuration for the centos VPN host.
+
+#### packer_ipsec.conf
+The configuration file for the libreswan IPSec vpn server. This is baked onto the AMI during the packer provisioing process.
+
+#### packer_provision.sh
+The script used when baking the base AMI, it installs the necessary software such as libreswan and the aws-cli, creates base configurations, and performs some basic hardening.
+
+#### set-psk.sh
+A helper script to set the Pre-Shared-Key for the VPN. The first argument (required) is the pre-shared-key, to include spaces or special characters wrap it in single quotes.  
+The second argument (optional) is the KMS Key-ID to use. If this is not set, a new Key will be created.  
+The script will return the Key-ID used to encypt the PSK, this will need to be placed into the appropriate place in the parameters.json file.
+
 ## Todo
 
 [ ] prove external authentication mechanism  
 [ ] improve hardening (follow: https://wiki.centos.org/HowTos/OS_Protection)  
+[x] add diagram and basic descript of the stack
