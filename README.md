@@ -1,7 +1,7 @@
 ## Cloudformation Stack for a IPSec VPN
 
 ## Description
-![architecture diagram](./aws-ipsec-vpn.svg "architecture diagram")
+![architecture diagram](https://raw.githubusercontent.com/cevoaustralia/aws-ipsec-vpn/master/aws-ipsec-vpn.svg "architecture diagram")
 Generated using draw.io, [source](./aws-ipsec-vpn.io).
 
 This is a simple cloudformation stack to provide an IPSec VPN into an AWS account.  
